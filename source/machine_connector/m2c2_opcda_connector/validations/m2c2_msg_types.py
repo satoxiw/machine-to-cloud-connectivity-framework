@@ -37,6 +37,6 @@ class OPCDAMsgValidations:
         return {
             "name": lambda x: isinstance(x, str),
             "timestamp": lambda x: isinstance(x, str),
-            "value": lambda x: x,
+            "value": lambda x: True,
             "quality": lambda x: isinstance(x, str) and x in self.quality_validations()
         }

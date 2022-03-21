@@ -37,7 +37,11 @@ class StreamManagerHelperClient:
             self.client = StreamManagerClient()
         except Exception as err:
             self.logger.error("Unable to connect to Stream Manager. Error: %s", str(err))
-            self.stream_manager_client = None
+            self.client = None
+
+    def __del__(self):
+        if self.client is not None:
+            self.client.close()
 
     def list_streams(self):
         try:

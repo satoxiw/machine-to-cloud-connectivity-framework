@@ -21,6 +21,7 @@ It publishes data to any of the following: SiteWise, Kinesis Data Stream, an IoT
 """
 import logging
 import os
+import time
 
 from greengrasssdk.stream_manager import (
     ExportDefinition
@@ -228,6 +229,8 @@ def main():
                     message_sequence_number += 1
                     write_checkpoint('primary', message_sequence_number)
                     sequence_number = message_sequence_number
+
+            time.sleep(0.1)
         except Exception as err:
             logger.error("There was an error when trying to read your data from a stream and send it to AWS: {}".format(err))
             raise
