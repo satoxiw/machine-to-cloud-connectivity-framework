@@ -185,11 +185,18 @@ export default class GreengrassHandler {
       });
     }
 
-    return {
-      Connector: [{
+    const sitewise_connector_regions : any[] = ['us-east-1','us-west-2','ap-southeast-1','ap-southeast-2','eu-central-1','eu-west-1','us-gov-west-1']
+    const connector : any[] = []
+
+    if (sitewise_connector_regions.includes(process.env.AWS_REGION)){
+      connector.push({
         Id: 'M2C2SitewiseConnector',
         ConnectorArn: `arn:aws:greengrass:${AWS_REGION}::/connectors/IoTSiteWise/versions/11`
-      }],
+      })
+    }
+
+    return {
+      Connector: connector,
       Core: [],
       Device: [],
       Function: functions,
